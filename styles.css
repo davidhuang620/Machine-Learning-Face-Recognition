@@ -1,0 +1,104 @@
+*{
+   line-height: 2;
+   font-family: 'Noto Serif TC', serif;
+   /* font-family: Kievit, sans-serif; */
+
+}
+
+
+body{
+   /* background-color: blue; */
+}
+
+.navbar{
+   position: fixed;
+   top: 0;
+   width: 100%;
+}
+
+header{
+   text-align: center;
+   font-family: 'Noto Serif TC', serif;
+}
+
+.main-header{
+   margin-top: 40px;
+   font-size: 5em;
+}
+
+.sub-header{
+   font-size: 2em;
+}
+
+
+.cover-img{
+   /* display: block; */
+   /* background-color: yellow; */
+   background-image:url("src/Grit.jpg");
+   /* min-height: 400px; */
+   /* background-image: url("https://storage.googleapis.com/gd-wagtail-prod-assets/original_images/evolving_google_identity_share.jpg"); */
+   background-position: center center;
+   background-repeat: no-repeat;
+   margin-top: 0px;
+   margin-bottom: 10px;
+   transition: all 1s;
+   min-height: 500px;
+   background-size: 67% auto;
+}
+
+.cover-img:hover{
+   transform: scale(1.1);
+
+}
+
+@media only screen and (max-width: 1000px){
+   .cover-img{
+      /* background-color: black; */
+      min-height: 400px;
+      background-size: cover;
+      /* min-height: 50px;
+      min-width: 50px; */
+/*
+      background-image:url("src/Grit.jpg");
+      min-height: 400px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      transition: all 1s;
+      background-size: auto; */
+   }
+}
+
+/* .center{
+   display: block;
+
+} */
+
+/* .img-fluid{
+   max-width: 100%;
+   height: auto;
+   margin-left: auto;
+   margin-right: auto;
+} */
+img{
+   /* width: 100%; */
+   transition: all 1s;
+}
+
+img:hover{
+   transform: scale(1.1);
+}
+
+
+.main-log{
+   text-align: center;
+
+}
+
+.main-text{
+
+   margin-left: 100px;
+   margin-right: 100px;
+
+}
