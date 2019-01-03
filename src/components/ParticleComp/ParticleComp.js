@@ -29,15 +29,26 @@ const particleParams = {
    },
    interactivity:{
       events:{
+         onhover:{
+            enable: true,
+            mode: "grab"
+         },
          onclick:{
             enable: true,
             mode: "repulse"
          }
       }
       ,
-      mode:{
+      modes:{
+         grab:{
+            line_linked:{
+               opacity: 0.5
+            },
+            distance: 300
+         },
          repulse:{
-            distance: 400
+            distance: 300,
+            duration: 2
          }
       }
    },
