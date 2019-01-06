@@ -10,8 +10,8 @@ import ParticleComp from "../components/ParticleComp/ParticleComp";
 const Clarifai = require('clarifai');
 
 const app = new Clarifai.App({
-   apiKey: '11f16fba3bba4b98a5229d8e02661a23';
-})
+   apiKey: '11f16fba3bba4b98a5229d8e02661a23'
+});
 
 class App extends Component {
   render() {
