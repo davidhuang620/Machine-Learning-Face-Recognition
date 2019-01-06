@@ -14,13 +14,31 @@ const app = new Clarifai.App({
 });
 
 class App extends Component {
+
+   constructor() {
+      super();
+      this.state = {
+         imageLink : ''
+      }
+   }
+
+   imageLinkChange = (event) => {
+      this.setState({imageLink: event.target.value});
+      console.log(this.state.imageLink);
+   }
+
+   imageLinkSubmit = (event) => {
+      console.log("click");
+
+   }
+
   render() {
     return (
       <div className="App">
          <ParticleComp />
          <Navigation />
          <Logo />
-         <ImageLinkForm />
+         <ImageLinkForm imageLinkChange={this.imageLinkChange} imageLinkSubmit={this.imageLinkSubmit}/>
          <Rank />
          {/* <FaceRecognition /> */}
       </div>
