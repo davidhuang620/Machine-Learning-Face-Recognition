@@ -4,7 +4,6 @@ import Navigation from '../components/Navigation/Navigation.js';
 import Logo from '../components/Logo/Logo.js';
 import ImageLinkForm from '../components/ImageLinkForm/ImageLinkForm';
 import Rank from "../components/Rank/Rank";
-// import Particles from 'react-particles-js';
 import ParticleComp from "../components/ParticleComp/ParticleComp";
 
 
