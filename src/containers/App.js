@@ -16,18 +16,39 @@ const app = new Clarifai.App({
 
 // https://samples.clarifai.com/face-det.jpg
 
+
+// const getFaceBox = (response) => {
+//    const faceBox = response['outputs'][0]['data']['regions'][0]['region_info']['bounding_box'];
+//    const image = document.getElementById('inputImage');
+//    const width = Number(image.width);
+//    const height = Number(image.height);
+//    console.log(response);
+//    return{
+//       leftCol: faceBox.left_col * width,
+//       topRow: faceBox.top_row * height,
+//       rightCol: width - (faceBox.right_col * width),
+//       bottomRow: height - (faceBox.bottom_row * height)
+//    }
+// }
+
 const getFaceBox = (response) => {
-   const faceBox = response['outputs'][0]['data']['regions'][0]['region_info']['bounding_box'];
+   const faceBox = response['outputs'][0]['data']['regions'];
    const image = document.getElementById('inputImage');
    const width = Number(image.width);
    const height = Number(image.height);
-   console.log(response);
-   return{
-      leftCol: faceBox.left_col * width,
-      topRow: faceBox.top_row * height,
-      rightCol: width - (faceBox.right_col * width),
-      bottomRow: height - (faceBox.bottom_row * height)
-   }
+   return(
+       faceBox.map( (item) => {
+            return (
+               {
+                  leftCol: item.region_info.bounding_box.left_col * width,
+                  topRow: item.region_info.bounding_box.top_row * height,
+                  rightCol: width - (item.region_info.bounding_box.right_col * width),
+                  bottomRow: height - (item.region_info.bounding_box.bottom_row * height)
+               }
+            );
+         }
+      )
+   );
 }
 
 
@@ -40,7 +61,7 @@ class App extends Component {
       super();
       this.state = {
          imageLink : '',
-         faceBox: {}
+         faceBox: []
       }
    }
 
@@ -53,6 +74,8 @@ class App extends Component {
          (response) => {
          resp = getFaceBox(response);
          this.setState({faceBox: resp});
+         console.log(response);
+         console.log(this.faceBox);
          })
       .catch(
          (err) => {console.log(err);}

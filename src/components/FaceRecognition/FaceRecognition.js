@@ -3,15 +3,19 @@ import './FaceRecognition.css';
 
 const FaceRecognition = ({imgLink, faceBox}) => {
 
-   const displayBoxes = (faceBox) => {
-      faceBox.map(
-         (box) => {
-            return(
-               <div className = 'boundingBox' style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}} > </div>
-            )
-         }
-      )
+   const displayBoxes = (arr) => {
+      return(
+         arr.map(
+            (item, ind) => {
+               return(
+                  <div key={ind} className = 'boundingBox' style={{top: item.topRow, right: item.rightCol, bottom: item.bottomRow, left: item.leftCol}} > </div>
+               )
+            }
+         )
+      );
    }
+
+   // <div className = 'boundingBox' style={{top: faceBox.topRow, right: faceBox.rightCol, bottom: faceBox.bottomRow, left: faceBox.leftCol}} > </div>
 
 
 // style={{zIndex: 1}}
@@ -21,7 +25,7 @@ const FaceRecognition = ({imgLink, faceBox}) => {
          <div className = 'absolute mt2' style={{zIndex: 1}}>
 
             <img id = 'inputImage' src = {imgLink} alt = 'URL not found' heigh='500px' width = 'auto' />
-            <div className = 'boundingBox' style={{top: faceBox.topRow, right: faceBox.rightCol, bottom: faceBox.bottomRow, left: faceBox.leftCol}} > </div>
+            {displayBoxes(faceBox)}
          </div>
       </div>
    );
