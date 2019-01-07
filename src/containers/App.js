@@ -14,20 +14,25 @@ const app = new Clarifai.App({
    apiKey: '11f16fba3bba4b98a5229d8e02661a23'
 });
 
-// "https://samples.clarifai.com/face-det.jpg"
-const model = (imageLink) => {
-   app.models.predict("a403429f2ddf4b49b307e318f00e528b", imageLink)
-   .then(
-    function(response) {
-      // do something with response
-      console.log(response);
-      // console.log(response['outputs'][0]['data']['regions']);
-    },
-    function(err) {
-      // there was an error
-    }
-  );
+// https://samples.clarifai.com/face-det.jpg
+
+const getFaceBox = (response) => {
+   const faceBox = response['outputs'][0]['data']['regions'][0]['region_info']['bounding_box'];
+   const image = document.getElementById('inputImage');
+   const width = Number(image.width);
+   const height = Number(image.height);
+   console.log(width, height);
+   console.log(faceBox);
+   return{
+      leftCol: faceBox.left_col * width,
+      topRow: faceBox.top_row * height,
+      rightCol: width - (faceBox.right_col * width),
+      bottomRow: height - (faceBox.bottom_row * height)
+   }
 }
+
+
+
 
 
 class App extends Component {
@@ -35,9 +40,31 @@ class App extends Component {
    constructor() {
       super();
       this.state = {
-         imageLink : ''
+         imageLink : '',
+         faceBox: {}
       }
    }
+
+   // model has to be in the Class to execture setState(). Since model is a promise and execute after the call stack.
+   model = (imageLink) => {
+
+      let resp = {};
+      app.models.predict("a403429f2ddf4b49b307e318f00e528b", imageLink)
+      .then(
+         (response) => {
+         resp = getFaceBox(response);
+         this.setState({faceBox: resp});
+         })
+      .then(
+         () => {
+         console.log(this.state);
+         })
+      .catch(
+         (err) => {console.log(err);}
+      );
+      return(resp);
+   }
+
 
    imageLinkChange = (event) => {
       this.setState({imageLink: event.target.value});
@@ -46,7 +73,10 @@ class App extends Component {
 
    imageLinkSubmit = (event) => {
       console.log("click");
-      model(this.state.imageLink);
+      this.model(this.state.imageLink);
+      // console.log(model(this.state.imageLink), 'hi');
+      // this.setState(faceBox);
+      console.log(this.state);
    }
 
   render() {
@@ -57,7 +87,7 @@ class App extends Component {
          <Logo />
          <ImageLinkForm imageLinkChange={this.imageLinkChange} imageLinkSubmit={this.imageLinkSubmit} />
          <Rank />
-         <FaceRecognition imgLink={this.state.imageLink}/>
+         <FaceRecognition imgLink={this.state.imageLink} faceBox={this.state.faceBox}/>
       </div>
     );
   }
