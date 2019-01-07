@@ -2,6 +2,18 @@ import React from "react";
 import './FaceRecognition.css';
 
 const FaceRecognition = ({imgLink, faceBox}) => {
+
+   const displayBoxes = (faceBox) => {
+      faceBox.map(
+         (box) => {
+            return(
+               <div className = 'boundingBox' style={{top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol}} > </div>
+            )
+         }
+      )
+   }
+
+
 // style={{zIndex: 1}}
 // Need to fix: particle is onto the image
    return(

@@ -21,8 +21,7 @@ const getFaceBox = (response) => {
    const image = document.getElementById('inputImage');
    const width = Number(image.width);
    const height = Number(image.height);
-   console.log(width, height);
-   console.log(faceBox);
+   console.log(response);
    return{
       leftCol: faceBox.left_col * width,
       topRow: faceBox.top_row * height,
@@ -55,10 +54,6 @@ class App extends Component {
          resp = getFaceBox(response);
          this.setState({faceBox: resp});
          })
-      .then(
-         () => {
-         console.log(this.state);
-         })
       .catch(
          (err) => {console.log(err);}
       );
@@ -68,15 +63,10 @@ class App extends Component {
 
    imageLinkChange = (event) => {
       this.setState({imageLink: event.target.value});
-      console.log(this.state.imageLink);
    }
 
    imageLinkSubmit = (event) => {
-      console.log("click");
       this.model(this.state.imageLink);
-      // console.log(model(this.state.imageLink), 'hi');
-      // this.setState(faceBox);
-      console.log(this.state);
    }
 
   render() {
