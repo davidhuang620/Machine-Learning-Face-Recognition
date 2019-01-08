@@ -17,19 +17,6 @@ const app = new Clarifai.App({
 // https://samples.clarifai.com/face-det.jpg
 
 
-// const getFaceBox = (response) => {
-//    const faceBox = response['outputs'][0]['data']['regions'][0]['region_info']['bounding_box'];
-//    const image = document.getElementById('inputImage');
-//    const width = Number(image.width);
-//    const height = Number(image.height);
-//    console.log(response);
-//    return{
-//       leftCol: faceBox.left_col * width,
-//       topRow: faceBox.top_row * height,
-//       rightCol: width - (faceBox.right_col * width),
-//       bottomRow: height - (faceBox.bottom_row * height)
-//    }
-// }
 
 const getFaceBox = (response) => {
    const faceBox = response['outputs'][0]['data']['regions'];
