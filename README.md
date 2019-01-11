@@ -1,5 +1,6 @@
-# Face Recognition using Machine Learning Alogrithm
+# Face Recognition using Machine Learning Algorithm
+
+Enter the url of any photo, the algorithm will then identify any human face in the photo.
 
 
-Credit: using clarifai.com RestFul API 
 
