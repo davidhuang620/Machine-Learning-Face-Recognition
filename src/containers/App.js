@@ -6,6 +6,8 @@ import ImageLinkForm from '../components/ImageLinkForm/ImageLinkForm';
 import Rank from "../components/Rank/Rank";
 import ParticleComp from "../components/ParticleComp/ParticleComp";
 import FaceRecognition from "../components/FaceRecognition/FaceRecognition";
+import Signin from "../components/Signin/Signin.js";
+import Register from "../components/Register/Register.js";
 
 const Clarifai = require('clarifai');
 
@@ -48,7 +50,9 @@ class App extends Component {
       super();
       this.state = {
          imageLink : '',
-         faceBox: []
+         faceBox: [],
+         route: 'signin',
+         isSignedIn: false
       }
    }
 
@@ -79,15 +83,38 @@ class App extends Component {
       this.model(this.state.imageLink);
    }
 
+   onRouteChange = (route) => {
+      if(route === 'signOut'){
+        this.setState({isSignedIn: false})
+     }else if (route === 'home'){
+        this.setState({isSignedIn: true})
+     }
+      this.setState({route: route});
+   }
+
   render() {
     return (
       <div className="App">
          <ParticleComp />
-         <Navigation />
+         <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+
+      {
+         (this.state.route === 'home') ?
+         <div>
          <Logo />
          <ImageLinkForm imageLinkChange={this.imageLinkChange} imageLinkSubmit={this.imageLinkSubmit} />
          <Rank />
          <FaceRecognition imgLink={this.state.imageLink} faceBox={this.state.faceBox}/>
+         </div>
+         : (
+            this.state.route === 'signin'
+            ?
+            <Signin onRouteChange={this.onRouteChange}/>
+           :
+            <Register onRouteChange={this.onRouteChange}/>
+         )
+
+      }
       </div>
     );
   }
